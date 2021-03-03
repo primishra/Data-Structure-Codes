@@ -1,0 +1,398 @@
+/*
+Program 13):
+        Program to implement a double queue using an array, and to implement:
+        (i) INSERT and DELETE from either side.
+        (ii) Input Restricted DQUEUE.
+        (iii) Output Restricted DQUEUE.
+*/
+
+#include <stdio.h>
+#include <conio.h>
+
+typedef struct
+{
+        int a[50];
+        int left;
+        int right;
+        int size;
+}dqueue;
+
+void initialize(dqueue *q,int n)
+{
+     q->left=-1;
+     q->right=-1;
+     q->size=n;
+}
+
+void ins(dqueue *q,int n,int ch)
+{
+     switch(ch)
+     {
+     		case 1:
+         	if(q->right==-1)
+     			{
+                    q->right++;
+     			}
+
+            if(q->left==-1)
+            {
+            	q->left++;
+               q->a[q->left]=n;
+            }
+            else
+            {
+            	q->left--;
+     				q->a[q->left]=n;
+            }
+         	break;
+
+         case 2:
+         	if(q->left==-1)
+     			{
+                    q->left++;
+     			}
+
+            q->right++;
+     			q->a[q->right]=n;
+            break;
+     }
+}
+
+
+
+int del(dqueue *q,int ch)
+{
+    int n;
+    switch(ch)
+     {
+     		case 1:
+         	n=q->a[q->left];
+            q->left++;
+         	break;
+
+         case 2:
+				n=q->a[q->right];
+            q->right--;
+            break;
+     }
+    return n;
+}
+
+
+
+int isOverflow(dqueue q)
+{
+    int x=0;
+
+    if(q.left==0)
+        x=1;
+    if(q.right>=q.size-1)
+    	  x=2;
+    if((q.left==0)&&(q.right>=q.size-1))
+    	  x=3;
+
+    return x;
+}
+
+int isUnderflow(dqueue q)
+{
+    int x=0;
+
+    if(q.left==-1)
+        x=1;
+    if(q.right==-1)
+    	  x=2;
+    if((q.left==-1)&&(q.right==-1))
+    	  x=3;
+    if(q.left>q.right)
+    	  x=4;
+
+    return x;
+}
+
+void show(dqueue q)
+{
+     int i;
+     for(i=q.left;i<=q.right;i++)
+     {
+                         printf("%d ",q.a[i]);
+     }
+     printf("\n");
+}
+
+
+int main()
+{
+    dqueue q;
+    int ch1=0,ch2=0,ch3=0, elem,size;
+
+    printf("----------------------------------------------------------------------\n\n");
+    printf(" Program to implement a double queue using an array, and to implement:\n (i) INSERT and DELETE from either side.\n (ii) Input Restricted DQUEUE.\n (iii) Output Restricted DQUEUE.");
+    printf("\n\n----------------------------------------------------------------------\n\n");
+
+    printf("\nEnter size of the queue: ");
+    scanf("%d",&size);
+    initialize(&q,size);
+
+    printf("\n\n1. Press 1 to implement insertion and deletion from either side.");
+    printf("\n2. Press 2 to implement input restricted dqueue.");
+    printf("\n3. Press 3 to implement output restricted dqueue.");
+    printf("\n\nEnter choice: ");
+    scanf("%d",&ch1);
+
+    while(ch2!=3)
+    {
+    		switch(ch1)
+         {
+         	case 1:
+                  	printf("\n\n1. Press 1 to INSERT an element into the queue");
+                		printf("\n2. Press 2 to DELETE an element from the queue");
+                		printf("\n3. Press 3 to SHOW final queue and exit");
+                		printf("\n\nEnter choice: ");
+                		scanf("%d",&ch2);
+
+                		switch(ch2)
+                		{
+                          case 1:
+                                   printf("\n1. Press 1 to insert from LEFT.");
+                                   printf("\n2. Press 2 to insert from RIGHT.");
+                                   printf("\n\nEnter choice: ");
+                                   scanf("%d",&ch3);
+
+                                   switch(ch3)
+                                   {
+                                   		case 1:
+                                             if((isOverflow(q)==1)||(isOverflow(q)==3))
+                                             {
+                                             	printf("\nOverflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+                                             	printf("\nEnter element to be inserted: ");
+                                   					scanf("%d",&elem);
+                                   					ins(&q,elem,ch3);
+                                             }
+                                             break;
+
+                                       case 2:
+                                             if((isOverflow(q)==2)||(isOverflow(q)==3))
+                                             {
+                                             	printf("\nOverflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+                                             	printf("\nEnter element to be inserted: ");
+                                   					scanf("%d",&elem);
+                                   					ins(&q,elem,ch3);
+                                             }
+                                             break;
+
+                                       default:
+                                       	printf("\nWrong choice entered");
+                                   	}
+
+                               		break;
+                          case 2:
+                                   printf("\n1. Press 1 to delete from LEFT.");
+                                   printf("\n2. Press 2 to delete from RIGHT.");
+                                   printf("\n\nEnter choice: ");
+                                   scanf("%d",&ch3);
+
+                                   switch(ch3)
+                                   {
+                                   		case 1:
+                                             if((isUnderflow(q)==1)||(isUnderflow(q)==3)||(isUnderflow(q)==4))
+                                             {
+                                             	printf("\nUnderflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+		                           					elem=del(&q,ch3);
+                                                printf("\nThe deleted element is: %d",elem);
+                                             }
+                                             break;
+
+                                       case 2:
+                                             if((isUnderflow(q)==2)||(isUnderflow(q)==3)||(isUnderflow(q)==4))
+                                             {
+                                             	printf("\nUnderflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+																elem=del(&q,ch3);
+                                             	printf("\nThe deleted element is: %d",elem);
+                                             }
+                                             break;
+
+                                       default:
+                                       	printf("\nWrong choice entered");
+                                   	}
+                               break;
+
+                          case 3:
+                               printf("\nThe final queue is:\n");
+                               show(q);
+                               break;
+                          default:
+                                  printf("\nWrong choice entered.");
+                		}
+                     break;
+
+            case 2:
+                	printf("\n\n1. Press 1 to INSERT an element into the queue");
+                	printf("\n2. Press 2 to DELETE an element from the queue");
+                	printf("\n3. Press 3 to SHOW final queue and exit");
+                	printf("\n\nEnter choice: ");
+                	scanf("%d",&ch2);
+
+                	switch(ch2)
+                		{
+                          case 1:
+                                   if((isOverflow(q)==2)||(isOverflow(q)==3))
+                                             {
+                                             	printf("\nOverflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+                                             	printf("\nEnter element to be inserted: ");
+                                   					scanf("%d",&elem);
+                                   					ins(&q,elem,2);
+                                             }
+                                    break;
+
+
+                          case 2:
+                                   printf("\n1. Press 1 to delete from LEFT.");
+                                   printf("\n2. Press 2 to delete from RIGHT.");
+                                   printf("\n\nEnter choice: ");
+                                   scanf("%d",&ch3);
+
+                                   switch(ch3)
+                                   {
+                                   		case 1:
+                                             if((isUnderflow(q)==1)||(isUnderflow(q)==3)||(isUnderflow(q)==4))
+                                             {
+                                             	printf("\nUnderflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+		                           					elem=del(&q,ch3);
+                                             	printf("\nThe deleted element is: %d",elem);
+                                             }
+                                             break;
+
+                                       case 2:
+                                             if((isUnderflow(q)==2)||(isUnderflow(q)==3)||(isUnderflow(q)==4))
+                                             {
+                                             	printf("\nUnderflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+																elem=del(&q,ch3);
+                                                printf("\nThe deleted element is: %d",elem);
+                                             }
+                                             break;
+
+                                       default:
+                                       	printf("\nWrong choice entered");
+                                   	}
+                               break;
+
+                          case 3:
+                               printf("\nThe final queue is:\n");
+                               show(q);
+                               break;
+                          default:
+                                  printf("\nWrong choice entered.");
+                		}
+                     break;
+
+            case 3:
+                	printf("\n\n1. Press 1 to INSERT an element into the queue");
+                	printf("\n2. Press 2 to DELETE an element from the queue");
+                	printf("\n3. Press 3 to SHOW final queue and exit");
+                	printf("\n\nEnter choice: ");
+                	scanf("%d",&ch2);
+
+                	switch(ch2)
+                		{
+                          case 1:
+                                   printf("\n1. Press 1 to insert from LEFT.");
+                                   printf("\n2. Press 2 to insert from RIGHT.");
+                                   printf("\n\nEnter choice: ");
+                                   scanf("%d",&ch3);
+
+                                   switch(ch3)
+                                   {
+                                   		case 1:
+                                             if((isOverflow(q)==1)||(isOverflow(q)==3))
+                                             {
+                                             	printf("\nOverflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+                                             	printf("\nEnter element to be inserted: ");
+                                   					scanf("%d",&elem);
+                                   					ins(&q,elem,ch3);
+                                             }
+                                             break;
+
+                                       case 2:
+                                             if((isOverflow(q)==2)||(isOverflow(q)==3))
+                                             {
+                                             	printf("\nOverflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+                                             	printf("\nEnter element to be inserted: ");
+                                   					scanf("%d",&elem);
+                                   					ins(&q,elem,ch3);
+                                             }
+                                             break;
+
+                                       default:
+                                       	printf("\nWrong choice entered");
+                                   	}
+
+                               		break;
+                          case 2:
+                                   if((isUnderflow(q)==1)||(isUnderflow(q)==3)||(isUnderflow(q)==4))
+                                             {
+                                             	printf("\nUnderflow");
+                                                break;
+                                             }
+                                   				else
+                                             {
+		                           					elem=del(&q,1);
+                                                printf("\nThe deleted element is: %d",elem);
+                                             }
+                          				break;
+
+
+
+                          case 3:
+                               printf("\nThe final queue is:\n");
+                               show(q);
+                               break;
+                          default:
+                                  printf("\nWrong choice entered.");
+                		}
+                  break;
+
+            default:
+                  	printf("\nWrong choice entered.");
+         }
+    }
+    getch();
+    return 0;
+}
+

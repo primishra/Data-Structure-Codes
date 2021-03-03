@@ -1,0 +1,89 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAX 51
+#define EMPTY (-1)
+#define FULL (MAX-1)
+char infix[MAX],stack[FULL],pfix[MAX];
+int top=EMPTY;
+
+void push(char x);
+char pop(void);
+int precedence(char sym);
+void main()
+{
+	char i=0,p=0,op,preceed;
+	clrscr();
+
+	cout<<"\n\nInput only single digit or characters.\n\nUse +,-,*,/,%,^,(,) only: \n\n";
+	cout<<"\nEnter infix expression ( length <  "<<MAX<<" ): ";
+	gets(infix);
+	i=strlen(infix);
+	infix[i+1]=NULL;
+	infix[i]=')';
+	i=0;
+	push('(');
+	while(infix[i]!=NULL)
+	{
+		if(infix[i]==' ')
+			i++;
+		if(isalpha(infix[i]) || isdigit(infix[i]))
+			pfix[p++]=infix[i++];
+		if(infix[i]=='(')
+		{
+			push('(');
+			i++;
+		}
+		if(infix[i]=='^'||infix[i]=='-'||infix[i]=='+'||infix[i]=='*'||infix[i]=='/'||infix[i]=='%')
+		{
+			op=infix[i++];
+			preceed=precedence(op);
+			while(top>EMPTY && preceed<=precedence(stack[top]))
+				pfix[p++]=pop();
+			push(op);
+		}
+		if(infix[i]==')')
+		{
+			while( top>EMPTY && stack[top]!='(')
+			pfix[p++]=pop();
+			top--;
+			i++;
+		}
+	}
+	pfix[p]='\0';
+	printf("\nResultant postfix expression is:\n");
+	puts(pfix);
+	getch();
+}
+void push(char x)
+{	if(top>FULL)
+	{
+		cout<<"\nStack full";
+		return;
+	}
+	else
+		stack[++top]=x;
+}
+char pop(void)
+{	if(top<=EMPTY)
+	{	cout<<"\n STACK EMPTY";
+		return 0;
+	}
+	else
+		return(stack[top--]);
+}
+int precedence(char sym)
+{	switch(sym)
+	{	case'(': return 0;
+		case'+': return 1;
+		case'-': return 1;
+		case'*': return 2;
+		case'/': return 2;
+		case'%': return 2;
+		case'^': return 3;
+		default: return 9;
+	}
+}

@@ -1,0 +1,260 @@
+/*
+Program 5:
+        Program to create an ordered list of peripheral devices, and to implement insertion, deletion, updation and length checking.
+*/
+
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+void prnt(char l[][50],int n)
+{
+     int i;
+     printf("\n{ ");
+     for(i=0;i<n;i++)
+     { 
+         printf("%s ",l[i]);
+     }
+     printf("}\n");
+}
+
+void insert(char l[][50],int max,int *n) 
+{
+    int m,pos,i,j,k=0;
+    char dev[50];
+    printf("\nEnter the no. of devices to be inserted into the list: ");
+    scanf("%d",&m);
+    
+    if((*n+m)>max)
+    {
+                 printf("\nOverflow");
+                 return;
+    }
+    else
+    {
+        for(i=1;i<=m;i++)
+        {
+                         printf("\nEnter device to be inserted: ");
+                         scanf("%s",dev);
+                         while((strcmp(dev,l[k])>0)&&(k<*n))
+                                                  k++;
+                         pos=k+1;
+                         
+                         for(j=*n;j>=pos;j--)
+                         {
+                                                 strcpy(l[j],l[j-1]);
+                         }
+                         strcpy(l[pos-1],dev);
+                         (*n)++;
+        }
+    }
+    
+    printf("\nOrdered List at the end of insertion: \n");
+    prnt(l,*n);  
+        
+}
+
+void delete(char l[][50],int *n) 
+{
+    int m,pos,i,j,k=0,ch;
+    char dev[50];
+   
+   printf("\nEnter the no. of devices to be deleted from the list: ");
+    scanf("%d",&m); 
+    
+    if(m>*n)
+    {
+                 printf("\nUnderflow");
+                 return;
+    }
+    
+    printf("\n\n1. Press 1 to delete by entering position no.");
+    printf("\n2. Press 2 to delete by entering device name.");
+    printf("\n\nEnter choice: ");
+    scanf("%d",&ch);
+       
+    switch(ch)
+    {
+                    case 1:
+                       for(i=1;i<=m;i++)
+                       {
+                                        printf("\nEnter position to be deleted: ");
+                                        scanf("%d",&pos);
+                                        
+                                        for(j=pos-1;j<(*n-1);j++)
+                                        {
+                                                 strcpy(l[j],l[j+1]);
+                                        }
+                                        (*n)--;
+                         }
+                         break;
+                  case 2:
+                       for(i=1;i<=m;i++)
+                       {
+                                        printf("\nEnter device to be deleted: ");
+                                        scanf("%s",dev);
+                                        
+                                        while(strcmp(dev,l[k])!=0)
+                                                  k++;
+                                        pos=k;
+                         
+                                        for(j=pos;j<(*n-1);j++)
+                                        {
+                                                 strcpy(l[j],l[j+1]);
+                                        }
+                                        (*n)--;
+                         }
+                         break;
+                  default:
+                          printf("\nWrong choice entered.");
+    }
+       
+    printf("\nOrdered List at the end of deletion: \n");
+    prnt(l,*n);  
+        
+}
+
+void update(char l[][50],int *n) 
+{
+     char dev[50],dev2[50];
+     int pos,pos2,ch,k=0,j;
+    
+    printf("\n\n1. Press 1 to update by entering position no.");
+    printf("\n2. Press 2 to update by entering device name.");
+    printf("\n\nEnter choice: ");
+    scanf("%d",&ch);
+    
+    switch(ch)
+    {
+              case 1:
+                   printf("\nEnter position to update: ");
+                   scanf("%d",&pos);
+                   printf("\nEnter new device name: ");
+                   scanf("%s",dev);
+                   
+                   for(j=pos-1;j<(*n-1);j++)
+                   {
+                    strcpy(l[j],l[j+1]);
+                    }
+                    (*n)--;
+                   
+                   while((strcmp(dev,l[k])>0)&&(k<*n))
+                                                  k++;
+                   pos=k+1;
+                         
+                   for(j=*n;j>=pos;j--)
+                   {
+                    strcpy(l[j],l[j-1]);
+                   }
+                   strcpy(l[pos-1],dev);
+                   (*n)++;
+                   
+                   break;
+              
+              case 2:
+                   printf("\nEnter device to update: ");
+                   scanf("%s",dev2);
+                   while((strcmp(dev,l[k])!=0)&&(k<*n))
+                                                  k++;
+                   pos=k+1;
+                   
+                   printf("\nEnter new device name: ");
+                   scanf("%s",dev);
+                   
+                   for(j=pos;j<(*n-1);j++)
+                   {
+                    strcpy(l[j],l[j+1]);
+                    }
+                    (*n)--;
+                   
+                   while((strcmp(dev,l[k])>0)&&(k<*n))
+                                                  k++;
+                   pos=k+1;
+                         
+                   for(j=*n;j>=pos;j--)
+                   {
+                    strcpy(l[j],l[j-1]);
+                   }
+                   strcpy(l[pos-1],dev);
+                   (*n)++;
+                   
+                   break;
+              default:
+                      printf("\nWrong choice entered.");
+    }
+    
+    printf("\nOrdered list at the end of updation: \n");
+    prnt(l,*n);
+}
+
+int main()
+{
+  char l[20][50],temp[50];
+  int i,n,j,ch;
+  
+  printf("----------------------------------------------------------------------\n\n");
+  printf(" Program to create an ordered list of peripheral devices, \n To implement insertion, deletion, updation and length checking in it");
+  printf("\n\n----------------------------------------------------------------------\n\n");
+  
+  printf("\nEnter the no. of devices to be inputted: ");
+  scanf("%d",&n);
+  
+  printf("\nInput the list of peripheral devices: \n");
+  for(i=0;i<n;i++)
+  {
+         scanf("%s",l[i]);
+  }
+  
+  for(i=0;i<n-1;i++)
+  {
+                  for(j=0;j<n-1-i;j++)
+                  {
+                        if(strcmp(l[j],l[j+1])>0)
+                        {
+                            strcpy(temp,l[j]);
+                            strcpy(l[j],l[j+1]);
+                            strcpy(l[j+1],temp);
+                        }
+                  }
+  }
+                                  
+  printf("\nThe ordered list (in alphabetical order) is: \n");
+  prnt(l,n);
+  
+  while(ch!=5)
+  {
+              printf("\n1.Press 1 to insert a device into the list.");
+              printf("\n2.Press 2 to delete an existing device from the list.");
+              printf("\n3.Press 3 to find the length of the list.");
+              printf("\n4.Press 4 to update a member in the list.");
+              printf("\n5.Press 5 to print the final list and exit.");
+              printf("\n\nEnter choice: ");
+              scanf("%d",&ch);
+  
+              switch(ch)
+              {
+                        case 1:
+                             insert(l,20,&n);
+                             break;
+                        case 2:
+                             delete(l,&n);
+                             break;
+                        case 3:
+                             printf("\nThe current length of the ordered list is: %d",n);
+                             break;
+                        case 4:
+                             update(l,&n);
+                             break;
+                        case 5:
+                             printf("\n\nThe final ordered list is: \n");
+                             prnt(l,n);
+                             break;
+                        default:
+                                printf("\nWrong choice entered.");
+              }
+  }
+               
+
+  getch();
+  return 0;
+}

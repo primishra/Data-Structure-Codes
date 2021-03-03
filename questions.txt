@@ -1,0 +1,67 @@
+Department of Computer Science and Engineering
+BIT Mesra
+Laboratory Assignment
+Class - BE (all) Semester – II Subject – CP2102 Data Structure Lab
+The questions appearing in BOLD are optional and carry more credit.
+1. Write a program to create a one dimensional array at run time using a user defined function with user given number of elements into it. Also write separate functions that would allow you to insert and delete elements into/from this array at any arbitrary location.
+2. WAP to add and subtract following polynomials 5x2 – 3xy + y, 2x2 – y2 + 5xy – x + y using array.
+3. Write a program to create one dimensional, two dimensional and three dimensional arrays in memory and then verify the various address calculation formulae for any arbitrary element of these arrays.
+4. Write a program to obtain a sparse matrix representation B for the matrix A given below
+0 1 0 0 0 0
+0 0 0 0 0 0
+-2 0 0 1 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 -3 0 0 0 0
+0 0 0 0 0 1
+5. Write a program to create an ordered list L[d1, d2, … dn] where each di is the name of a peripheral device, which is maintained in the alphabetical order. Write functions to
+a. Insert a device dk onto the list L.
+b. Delete an existing device di from L. In this case the new ordered list should be Lnew = (d1, d2, … di-1, di+1, … dn) with (n – 1) elements.
+c. Find the length of L.
+d. Update the device dj to dk and print the new list.
+6. Write a program to implement a stack in an array and perform PUSH, POP, PEEP and CHANGE operations on it using functions.
+7. WAP to convert the following expression to its postfix equivalent using stack
+a. ((A + B )* D) ^ (E – F)
+b. A + (B * C – (D / E ^ F) * G) * H Where ^: raise to the power
+8. Implement a stack S of n elements using arrays. Write functions to perform PUSH and POP operations. Implement queries using push and pop functions to
+a. Retrieve the mth element of the stack S from the top (m < n), leaving the stack without its top m – 1 elements.
+b. Retain only the elements in the odd position of the stack and pop out all even positioned elements.
+9. Implement a program to evaluate any given postfix expression. Test your program for the evaluation of the equivalent postfix form of the expression ( - (A*B)/D) ? C + E – F * H * I for A = 1, B = 2, D = 3, C = 14, E = 110, F = 220, H = 16.78, I = 364.621.
+10. WAP to implement linear queue using array and linked list.
+11. WAP to implement circular queue using array and linked list.
+12. WAP to declare a priority queue using two-dimensional array, store elements and priority. Display the elements according to priority from higher to lower.
+  13. A deque DQUE is to be implemented using a one dimensional array of size N. Write functions to:
+a. Insert and delete elements from DQUE at either ends.
+b. Implement DQUE as input restricted deque.
+c. Implement DQUE as output restricted deque.
+14. Write a menu driven program to perform the following operations on a singly linked list.
+a. Create
+b. Insert
+c. Delete
+d. Display
+e. Exit.
+15. WAP to create a sorted one way linked list with n nodes. Extend the program to insert a new node at appropriate location so that order does not get disturbed.
+16. WAP to create a circular list and then count the number of nodes into it.
+17. WAP to implement doubly linked list having facilities to insert a node at any position and to delete a node with particular information.
+18. Let X = (x1, x2, … xn), Y = (y1, y2, …yn) be two lists with a sorted sequence of elements. Write a program to merge the two lists together as a single list Z with m + n elements. Implement the lists using singly linked list representations.
+19. Write a program which will split a circularly linked list P with n nodes into two circularly linked lists P1, P2 with the first and the last n - nodes of the list P in them, respectively.
+20. Write a menu driven program which will maintain a list of car models, their price, name of the manufacturer, engine capacity etc., as a doubly linked list. The menu should make provisions for inserting information pertaining to new car models, delete obsolete models, and update data such as price besides answering queries such as listing all car models within a price range specified by the user and listing all details given a car model.
+21. WAP to evaluate a postfix expression using a linked stack implementation.
+22. WAP for creation of binary tree and traverse it in Pre, Post and Inorder. Show the traversal output.
+23. WAP to construct an expression tree for a given arithmetic expression, check its correctness by traversing it in inorder.
+24. WAP to count the no. of leaf nodes in a binary tree.
+25. Write non-recursive functions to perform the inorder, preorder and postorder traversals of a binary tree.
+26. Implement a menu driven program to perform the following operations on a binary search tree:
+a. Construct a BST (Construction begins from an empty tree)
+b. Insert element(s) into a non empty BST
+c. Delete element(s) from a non empty BST
+d. Search for an element in a BST
+e. Retrieve elements of the BST in the sorted order.
+27. WAP to input a graph G = (V, E) as an adjacency matrix. Include functions to
+a. Test if G is complete.
+b. Obtain the degree of a node u, if G is undirected, and indegree and outdegree of node u if G is directed.
+28. WAP to input a graph G = (V, E) as an adjacency list. Include two functions BFT and DFT to undertake breadth first traversal and depth first traversal of the graph.
+29. WAP to implement Shell sort, Quick sort and heap sort for any arbitrary set of elements with the help of user defined functions.
+30. Implement a binary search on an ordered list. For the list L = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ,13, 14, 15, 16, 17, 18, 19, 20} undertake search for the elements in the list {3, 18, 1, 25}. Compare the number of key comparisons made during the searches.
+-----
+• Compiled and edited by – D. K. Mallick, Course Coordinator

@@ -1,0 +1,110 @@
+#include <iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<ctype.h>
+
+struct node
+{
+	int value;
+	node *ptr;
+};
+
+node *front=NULL,*rear=NULL;
+
+void add(int val);
+int del();
+void show();
+void main()
+{
+	int ch=1,val;
+	clrscr();
+	while(ch!=4)
+	{
+	    clrscr();
+	    cout<<"\n\t Main Menu\n\t _________\n";
+	    cout<<"\n 1.Add in queue -----> 1";
+	    cout<<"\n 2.Delele from queue -----> 2";
+	    cout<<"\n 3.Show the queue -----> 3";
+	    cout<<"\n 4.Exit from menu -----> 4";
+	    cout<<"\n\n\n Enter your choice(1-4) :";
+	    cin>>ch;
+	    if(ch==1)
+	    {
+		 cout<<"\n Enter the value to be added in the queue :";
+		 cin>>val;
+		 add(val);
+	     }
+	     if(ch==2)
+	     {
+		  val=del();
+		  if(val!=-1)
+		  cout<<"Value deleted from queue is :"<<val;
+		  getch();
+	     }
+	     if(ch==3)
+		 show();
+	}
+}
+
+void add(int val)
+{
+	node *temp=new(node);
+	if(temp==NULL)
+		cout<<"Queue is full";
+	temp->value=val;
+	temp->ptr=NULL;
+	if(front==NULL)
+	{
+		rear=front=temp;
+		return;
+	}
+	rear->ptr=temp;
+	rear=rear->ptr;
+}
+
+int del()
+{
+	int value;
+	node *temp;
+	if(front==NULL)
+	{
+		cout<<"\n Queue empty. \n";
+		value=-1;
+	}
+	else
+	{
+		value=front->value;
+		temp=front;
+		front=front->ptr;
+		delete(temp);
+	}
+	return(value);
+}
+void show()
+{
+	clrscr();
+	if(front==NULL)
+	{
+		cout<<"Queue empty";
+		return;
+	}
+	node *temp;
+	cout<<"\nThe values are";
+	temp=front;
+	while(temp!=NULL)
+	{
+		cout<<"\n"<<temp->value;
+		temp=temp->ptr;
+	}
+	getch();
+}
+
+
+
+
+
+
+
+
+
+

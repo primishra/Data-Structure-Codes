@@ -1,0 +1,129 @@
+#include <iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#include<stdio.h>
+struct node
+{
+	int value;
+	node *ptr;
+};
+
+
+void add(node **,int val);
+void del(node **);
+void show(node *);
+void main()
+{
+	node *start,*temp,*temp2;
+	start=NULL;
+	int ch=1,val,n;
+	clrscr();
+	cout<<"\nEnter the no. of nodes : ";
+	cin>>n;
+	temp=new(node);
+	cout<<"\nEnter the value no. 1 :";
+	cin>>temp->value;
+	temp->ptr=NULL;
+	start=temp;
+	for(int i=1;i<n;i++)
+	{
+		temp2=new(node);
+		cout<<"\nEnter the value no. "<<i+1<<" : ";
+		cin>>temp2->value;
+		temp2->ptr=NULL;
+		temp->ptr=temp2;
+		temp=temp2;
+	}
+	while(ch!=4)
+	{
+	    clrscr();
+	    cout<<"\n\t Main Menu\n\t _________\n";
+	    cout<<"\n 1.Add in/Create List -----> 1";
+	    cout<<"\n 2.Delele from List -----> 2";
+	    cout<<"\n 3.Show the List -----> 3";
+	    cout<<"\n 4.Exit from menu -----> 4";
+	    cout<<"\n\n\n Enter your choice(1-4) :";
+	    fflush(stdin);
+	    cin>>ch;
+	    if(ch==1)
+	    {
+		 cout<<"\n Enter the value to be added in the List :";
+		 cin>>val;
+		 add(&start,val);
+	     }
+	     if(ch==2)
+	     {
+		 del(&start);
+	     }
+	     if(ch==3)
+		 show(start);
+	}
+}
+
+void add(node **start,int val)
+{
+	node *temp;
+	node *temp2=new(node);
+	if(*start==NULL)
+	{
+		temp2->value=val;
+		temp2->ptr=NULL;
+		*start=temp2;
+	}
+	else
+	{
+		temp=*start;
+		while(temp->ptr!=NULL)
+			temp=temp->ptr;
+		temp2->value=val;
+		temp2->ptr=NULL;
+		temp->ptr=temp2;
+	}
+}
+
+void del(node **start)
+{
+	int value,num,flag=0;
+	cout<<"\nEnter the value to be deleted from the list. : ";
+	fflush(stdin);
+	cin>>num;
+	node *temp,*old;
+	temp=*start;
+	while(temp!=NULL)
+	{
+		if(temp->value==num)
+		{
+			flag=1;
+			if(temp==*start)
+				*start=temp->ptr;
+			else
+				old->ptr=temp->ptr;
+			delete(temp);
+		}
+		else
+		{
+			old=temp;
+			temp=temp->ptr;
+		}
+	}
+	if(!flag)
+	{
+		cout<<"\nElement not found.";
+		getch();
+	}
+}
+
+void show(node *start)
+{
+	clrscr();
+	fflush(stdout);
+	node *temp=start;
+	cout<<"\nThe values are : \n";
+	while(temp!=NULL)
+	{
+		cout<<"\n"<<temp->value;
+		temp=temp->ptr;
+	}
+	getch();
+}
